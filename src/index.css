@@ -1,13 +1,266 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ── 팔레트 ──────────────────────────────────────────── */
+:root {
+  --bg:        #0a0a12;
+  --surface:   #13132a;
+  --surface2:  #1a1a35;
+  --border:    rgba(130, 100, 255, 0.2);
+
+  --purple:    #7c5cbf;
+  --violet:    #9b6dff;
+  --indigo:    #4a3fa0;
+  --gold:      #e8c84a;
+  --gold-dim:  #b89a2a;
+  --text:      #e8e4f0;
+  --text-muted:#a09ab8;
+  --star:      rgba(232, 200, 74, 0.6);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* ── 리셋 & 베이스 ────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+  overflow-x: hidden;
 }
+
+/* ── 별 배경 (CSS only) ───────────────────────────────── */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 작은 별들 */
+body::before {
+  background-image:
+    radial-gradient(1px 1px at 10% 15%, var(--star) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 40%, var(--star) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 40% 8%,  var(--star) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 55%, var(--star) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 70% 20%, var(--star) 0%, transparent 100%),
+    radial-gradient(1px 1px at 80% 65%, var(--star) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 10%, var(--star) 0%, transparent 100%),
+    radial-gradient(2px 2px at 15% 75%, var(--star) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 90%, var(--star) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 60% 80%, var(--star) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 45%, var(--star) 0%, transparent 100%),
+    radial-gradient(1px 1px at 5%  50%, var(--star) 0%, transparent 100%),
+    radial-gradient(2px 2px at 95% 85%, var(--star) 0%, transparent 100%),
+    radial-gradient(1px 1px at 48% 30%, var(--star) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 88% 38%, var(--star) 0%, transparent 100%);
+  animation: twinkle 6s ease-in-out infinite alternate;
+}
+
+/* 보라 성운 glow */
+body::after {
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 30%, rgba(76, 50, 160, 0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 35% at 80% 70%, rgba(120, 60, 180, 0.14) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(60, 40, 120, 0.10) 0%, transparent 70%);
+}
+
+@keyframes twinkle {
+  0%   { opacity: 0.7; }
+  50%  { opacity: 1;   }
+  100% { opacity: 0.5; }
+}
+
+/* ── 레이아웃 ─────────────────────────────────────────── */
+#root {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── 타이포그래피 ──────────────────────────────────────── */
+h1, h2, h3 { line-height: 1.3; }
+
+/* ── 공용 컴포넌트 ────────────────────────────────────── */
+
+/* 골드 그라데이션 텍스트 */
+.text-gold {
+  background: linear-gradient(135deg, var(--gold) 0%, #fff3b0 50%, var(--gold-dim) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 보라 그라데이션 텍스트 */
+.text-violet {
+  background: linear-gradient(135deg, var(--violet) 0%, #c4a8ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 카드 */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+/* 유리 효과 카드 */
+.card-glass {
+  background: rgba(20, 18, 42, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(130, 100, 255, 0.25);
+  border-radius: 20px;
+  padding: 24px;
+}
+
+/* 기본 버튼 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 50px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+.btn:active { transform: scale(0.97); }
+
+/* 골드 CTA 버튼 */
+.btn-gold {
+  background: linear-gradient(135deg, #c9a227 0%, var(--gold) 50%, #e0b830 100%);
+  color: #1a1200;
+  box-shadow: 0 4px 20px rgba(232, 200, 74, 0.35);
+}
+.btn-gold:hover {
+  box-shadow: 0 6px 28px rgba(232, 200, 74, 0.5);
+  transform: translateY(-1px);
+}
+
+/* 아웃라인 버튼 */
+.btn-outline {
+  background: transparent;
+  color: var(--violet);
+  border: 1.5px solid var(--violet);
+}
+.btn-outline:hover {
+  background: rgba(155, 109, 255, 0.1);
+}
+
+/* 고스트 버튼 */
+.btn-ghost {
+  background: rgba(255,255,255,0.06);
+  color: var(--text-muted);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--text);
+}
+
+/* ── 폼 요소 ──────────────────────────────────────────── */
+.form-select,
+.form-input {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 1rem;
+  padding: 12px 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-select:focus,
+.form-input:focus {
+  border-color: var(--violet);
+  box-shadow: 0 0 0 3px rgba(155, 109, 255, 0.15);
+}
+.form-select option { background: var(--surface2); }
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  letter-spacing: 0.03em;
+}
+
+/* 체크박스 */
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.checkbox-row input[type="checkbox"] {
+  width: 16px; height: 16px;
+  accent-color: var(--violet);
+  cursor: pointer;
+}
+
+/* ── 별점 ────────────────────────────────────────────── */
+.stars {
+  display: inline-flex;
+  gap: 3px;
+  font-size: 1.1rem;
+}
+.star-filled  { color: var(--gold);     }
+.star-empty   { color: rgba(232,200,74,0.25); }
+
+/* ── 구분선 ──────────────────────────────────────────── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
+
+/* ── 모바일 우선 컨테이너 ──────────────────────────────── */
+.page {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 20px 40px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+/* ── 스크롤바 ─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--indigo); border-radius: 3px; }
+
+/* ── 유틸 ────────────────────────────────────────────── */
+.mt-4  { margin-top:  4px; }
+.mt-8  { margin-top:  8px; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mt-24 { margin-top: 24px; }
+.mt-32 { margin-top: 32px; }
+.mt-40 { margin-top: 40px; }
+.text-center { text-align: center; }
+.text-sm     { font-size: 0.875rem; }
+.text-xs     { font-size: 0.75rem; }
+.w-full      { width: 100%; }
