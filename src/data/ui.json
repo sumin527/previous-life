@@ -1,0 +1,284 @@
+{
+ "meta": {
+  "title": "나는 어떤 전생을 살았을까? - 전생 테스트",
+  "description": "별자리로 알아보는 나의 전생.",
+  "og_title": "별자리는 당신의 전생을 기억합니다",
+  "og_description": "생년월일 하나로 알아보는 나의 전생 캐릭터! 144가지 별자리 조합 속 내 영혼의 진짜 모습을 확인해 보세요.",
+  "og_image": "https://previous-life.pages.dev/og-image.png",
+  "twitter_title": "별자리는 당신의 전생을 기억합니다",
+  "twitter_description": "생년월일 하나로 알아보는 나의 전생 캐릭터! 지금 확인해 보세요.",
+  "ga4_id": "G-0VYFNC0TDV",
+  "adsense_client": "ca-pub-1521455570195697  (재구축 시 제거 예정)"
+ },
+ "landing": {
+  "orb_emoji": "🔮",
+  "headline": [
+   "점성술로 보는",
+   "당신의 전생 이야기"
+  ],
+  "sub": [
+   "생년월일로 알아보는 나의 전생 캐릭터",
+   "친구랑 같이 보면 더 재밌는 전생 궁합까지"
+  ],
+  "cta": "✨ 내 전생 보러가기",
+  "hint": "당신은 몇 번째 환생일까요?",
+  "disclaimer": "이 테스트는 베딕 점성술 개념을 바탕으로 만든 재미용 자기이해 콘텐츠이며, 실제 전생이나 운명을 단정하지 않습니다.",
+  "section_title": "베딕 점성술로 보는 전생 테스트란?",
+  "cards": [
+   {
+    "title": "🌙 달 별자리(Moon Sign)란?",
+    "body": "베딕 점성술에서 달 별자리는 태양 별자리보다 훨씬 깊은 내면의 자아를 드러냅니다. 태어난 순간 달이 위치한 별자리가 감정 패턴, 무의식, 전생의 기억을 결정한다고 봅니다."
+   },
+   {
+    "title": "🔮 144가지 전생 캐릭터",
+    "body": "태양 별자리 12개 × 달 별자리 12개 조합으로 총 144가지 전생 캐릭터를 제공합니다. 각 캐릭터는 전생 이야기, 이번 생의 숙제, 영혼의 매력도를 담고 있어요."
+   },
+   {
+    "title": "💑 전생 궁합이란?",
+    "body": "베딕 점성술의 아쉬타쿠트(Ashtakoot) 시스템을 기반으로 두 사람의 전생 인연과 궁합을 분석합니다. 영혼의 결, 감정 호환, 관계 안정도 등 8가지 항목으로 점수를 산출해요."
+   },
+   {
+    "title": "📖 베딕 점성술 가이드",
+    "body": "전생 테스트 결과가 궁금하다면? 베딕 점성술의 기초부터 27개 낙샤트라(달의 저택) 상세 해설까지, 더 깊은 이해를 위한 가이드를 준비했어요."
+   }
+  ],
+  "footer_note": "베딕 점성술 기반 · 태양 & 달 별자리 분석"
+ },
+ "form": {
+  "badge": "정보 입력",
+  "back": "← 뒤로",
+  "title": [
+   "당신의 ",
+   "출생 정보",
+   "를 알려주세요"
+  ],
+  "labels": {
+   "year": "연도",
+   "month": "월",
+   "day": "일",
+   "birth_time": "출생 시간",
+   "birth_place": "출생 장소",
+   "gender": "성별"
+  },
+  "year_suffix": "년",
+  "months": [
+   "1월",
+   "2월",
+   "3월",
+   "4월",
+   "5월",
+   "6월",
+   "7월",
+   "8월",
+   "9월",
+   "10월",
+   "11월",
+   "12월"
+  ],
+  "time_placeholder": "-- 시 --",
+  "time_options": "0~23시 (0시=0시 (자정), 12시=12시 (정오), 나머지=N시)",
+  "time_unknown": "출생 시간을 몰라요",
+  "time_unknown_hint": "체크하면 대략적인 결과로 보여드려요",
+  "place_placeholder": "-- 시/도 --",
+  "place_unknown": "출생 장소를 몰라요",
+  "regions": [
+   "서울특별시",
+   "부산광역시",
+   "인천광역시",
+   "대구광역시",
+   "광주광역시",
+   "대전광역시",
+   "울산광역시",
+   "세종특별자치시",
+   "경기도",
+   "강원특별자치도",
+   "충청북도",
+   "충청남도",
+   "전북특별자치도",
+   "전라남도",
+   "경상북도",
+   "경상남도",
+   "제주특별자치도"
+  ],
+  "gender_options": [
+   "여성",
+   "남성",
+   "선택 안 함"
+  ],
+  "submit": "✨ 전생 확인하기",
+  "note": "입력하신 정보는 저장되지 않습니다",
+  "errors": {
+   "birthdate": "생년월일을 모두 선택해주세요.",
+   "year": "올바른 연도를 입력해주세요. (1900–2026)",
+   "date": "올바른 날짜를 입력해주세요.",
+   "time": "태어난 시간을 선택하거나, 모른다면 체크해주세요.",
+   "place": "태어난 장소를 선택하거나, 모른다면 체크해주세요.",
+   "gender": "성별을 선택해주세요."
+  },
+  "loading": "전생 분석 중..."
+ },
+ "result": {
+  "badge": "전생 결과",
+  "back": "← 처음으로",
+  "loading": "🔮 결과를 불러오는 중입니다",
+  "loading_hint": "잠시만 기다려주시거나 데이터가 누락된 경우 다시 시도해 주세요.",
+  "back_home": "처음으로 돌아가기",
+  "unknown_title": "미지의 영혼",
+  "sign_badges": {
+   "sun": " 태양 ",
+   "moon": " 달 "
+  },
+  "stats": {
+   "soul_age": "영혼 나이",
+   "soul_age_unit": "년",
+   "reincarnation": "환생 횟수",
+   "reincarnation_unit": "회",
+   "charm": "영혼의 매력도"
+  },
+  "profile_title": "🪞 전생의 프로필",
+  "profile_labels": {
+   "gender": "성별",
+   "build": "체격",
+   "appearance": "외모",
+   "status": "신분",
+   "wealth": "재력",
+   "lifespan": "수명"
+  },
+  "story_title": "✦ 전생 이야기",
+  "story_empty": "베일에 싸인 전생의 기록을 불러올 수 없습니다.",
+  "karma_title": "🔄 이번 생의 숙제",
+  "karma_empty": "현생의 업보 데이터가 존재하지 않습니다.",
+  "buttons": {
+   "share": "📤 결과 공유하기",
+   "copied": "✓ 복사됐어요!",
+   "match": "💑 친구와 궁합 보기",
+   "retry": "🔄 다시 해보기"
+  },
+  "share_title": "내 전생 결과",
+  "share_text_template": "친구의 전생은 \"{title}\"이었대요 🔮 당신의 전생은? → {url}",
+  "footer_note": "베딕 점성술 기반 · 태양 & 달 별자리 분석"
+ },
+ "match_invite": {
+  "badge": "궁합 초대",
+  "back": "← 뒤로",
+  "hero": [
+   "친구에게 보낼 ",
+   "궁합 링크",
+   "를 만들어요"
+  ],
+  "my_signs": "내 별자리",
+  "nickname_label": "내 닉네임",
+  "nickname_placeholder": "친구가 볼 이름 (예: 수민)",
+  "nickname_maxlength": 10,
+  "nickname_error": "닉네임을 입력해주세요.",
+  "create": "🔗 궁합 링크 생성하기",
+  "share_sns": "📤 SNS로 공유하기",
+  "copy_link": "🔗 링크 복사하기",
+  "copied": "✓ 복사됐어요!",
+  "hint": "링크를 받은 친구가 자기 정보를 입력하면 궁합이 나와요",
+  "share_text_template": "{name}의 전생 궁합을 확인해보세요! 🔮",
+  "share_title": "전생 궁합 보기"
+ },
+ "match_invalid": {
+  "title": "🔮 초대 링크가 올바르지 않아요",
+  "body": "링크를 다시 확인해주세요."
+ },
+ "match_result": {
+  "badge": "전생 궁합 결과",
+  "back": "← 처음으로",
+  "title": "전생 궁합",
+  "good": "💑 잘 맞는 부분",
+  "clash": "💥 부딪치는 부분",
+  "homework": "💡 둘이 풀어야 할 숙제",
+  "detail_open": "▼ 상세 점수 보기",
+  "detail_close": "▲ 상세 점수 접기",
+  "detail_title": "상세 항목",
+  "items": [
+   {
+    "key": "varna",
+    "label": "영혼의 결"
+   },
+   {
+    "key": "vashya",
+    "label": "끌림의 정도"
+   },
+   {
+    "key": "tara",
+    "label": "함께했을 때 운"
+   },
+   {
+    "key": "yoni",
+    "label": "감정의 호환"
+   },
+   {
+    "key": "grahaMaitri",
+    "label": "영혼의 친밀도"
+   },
+   {
+    "key": "gana",
+    "label": "기질 합"
+   },
+   {
+    "key": "bhakoot",
+    "label": "관계 안정도"
+   },
+   {
+    "key": "nadi",
+    "label": "관계 지속성"
+   }
+  ],
+  "vedic_note": "💫 베딕 정통 풀이는 준비 중이에요",
+  "vedic_note_sub": "완성되면 알려드릴게요",
+  "copied": "✓ 링크 복사됐어요!",
+  "share": "📤 결과 공유하기",
+  "cta_mine": "🔮 내 전생 보기",
+  "share_title": "전생 궁합 결과",
+  "share_text_template": "{nameA} × {nameB} 궁합 점수는 {total}점! ✨",
+  "footer_note": "베딕 점성술 기반"
+ },
+ "match_result_invalid": {
+  "body": "올바르지 않거나 만료된 궁합 결과 링크입니다.",
+  "back": "처음으로 이동",
+  "cta_title": "나도 친구와 전생 궁합을 보고 싶다면?",
+  "cta": "🔮 내 전생 & 궁합 확인하기"
+ },
+ "share_page": {
+  "invalid_title": "🔮 링크가 올바르지 않아요",
+  "invalid_body": "전생 링크를 다시 확인해주세요.",
+  "badge": "전생 공유",
+  "of_whose": "의 전생",
+  "story_partial": "✦ 전생 이야기 (일부)",
+  "story_teaser": "전체 이야기와 현생 업보는 직접 확인해보세요 ✨",
+  "cta_title": "당신의 전생은 무엇일까요?",
+  "cta_sub": "144가지 별자리 조합으로 알아보는 내 영혼의 기록",
+  "cta": "🔮 내 전생 알아보기",
+  "footer_note": "베딕 점성술 기반 · 태양 & 달 별자리 분석"
+ },
+ "footer": {
+  "links": [
+   {
+    "label": "베딕 점성술 가이드",
+    "to": "/guide"
+   },
+   {
+    "label": "개인정보처리방침",
+    "to": "/privacy"
+   },
+   {
+    "label": "소개 및 문의",
+    "to": "/contact"
+   }
+  ]
+ },
+ "routes": {
+  "/": "랜딩",
+  "/match": "궁합 초대/수신",
+  "/share": "공유 수신",
+  "/guide": "전생 테스트 소개 & FAQ",
+  "/astrology": "베딕 점성술 가이드",
+  "/nakshatra": "낙샤트라 상세",
+  "/privacy": "개인정보처리방침",
+  "/contact": "소개 및 문의",
+  "/match-result": "궁합 결과"
+ }
+}
