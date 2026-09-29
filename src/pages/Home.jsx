@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ui from '../data/ui.json';
 import characters from '../data/characters.json';
 import { getSunSign, getMoonSignWithTime, getMoonSignHash, signNameKo } from '../utils/astro';
