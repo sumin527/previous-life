@@ -80,3 +80,7 @@
 .form-row-3 > * { flex: 1; min-width: 0; }
 .form-row-3 > div { display: flex; align-items: center; gap: 4px; }
 .form-suffix { font-size: 0.85rem; color: var(--text-muted); white-space: nowrap; }
+
+/* ===== 추가: 궁합 인물 카드 뱃지 ===== */
+.match-person-signs { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.match-person-signs .sign-badge { font-size: 0.68rem; padding: 4px 10px; white-space: nowrap; }
