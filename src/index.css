@@ -4,7 +4,7 @@
 .page-container { width: 100%; max-width: 480px; margin: 0 auto; }
 .landing-page { padding: 0 20px; }
 .landing-hero { text-align: center; padding: 48px 0 32px; }
-.landing-orb { font-size: 3.5rem; margin-bottom: 16px; }
+.landing-orb { font-size: 3.5rem; margin: 0 auto 16px; width: auto; }
 .landing-title { font-size: 1.7rem; font-weight: 800; line-height: 1.4; margin-bottom: 14px; color: var(--text); }
 .landing-sub { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 24px; }
 .landing-hint { margin-top: 16px; font-size: 0.85rem; color: var(--gold); }

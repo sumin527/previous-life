@@ -64,17 +64,6 @@ function Landing({ onStart }) {
         <p className="landing-hint">{LANDING.hint}</p>
         <p className="landing-disclaimer">{LANDING.disclaimer}</p>
       </div>
-      <div className="landing-section">
-        <h2 className="landing-section-title">{LANDING.section_title}</h2>
-        <div className="landing-cards">
-          {LANDING.cards.map((card, i) => (
-            <div key={i} className="card-glass landing-card">
-              <h3>{card.title}</h3>
-              <p>{card.body}</p>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }
