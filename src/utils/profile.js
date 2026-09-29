@@ -12,7 +12,8 @@ function pick(list, u, offset = 0) {
   return list[(u + offset) % list.length];
 }
 
-const DEATH_WORDS = ['젊은', '이른', '요절', '쓰러져', '눈밭에', '전사', '처형', '불꽃처럼'];
+const DEATH_WORDS = ['이른', '요절', '쓰러져', '눈밭에', '처형'];
+// 제외됨: '젊은'(타인 지칭 오탐), '전사'(warrior 명사 오탐), '불꽃처럼'(비유 오탐)
 const REBIRTH_WORDS = ['새벽', '희망', '다시', '태어나', '피어났'];
 
 const BUILD_MAP = {
@@ -36,6 +37,38 @@ const WEALTH_BY_STATUS = {
   '귀족': ['풍족', '여유로운', '안정'],
   '평민': ['안정', '평범', '검소'],
   '하층민': ['부족한', '가난함', '궁핍한'],
+};
+
+// 스토리와 프로필이 충돌하는 캐릭터의 명시적 오버라이드 (2026-09-30 전수 감사 반영)
+// 해시가 id 기반이라 story 내용을 모르므로, story에 성별/신분이 명시된 케이스는 직접 지정
+const PROFILE_OVERRIDES = {
+  // 성별: story 근거
+  cancer_libra: { gender: '여성' },        // "여관 안주인… 남편이 술에 취해"
+  cancer_sagittarius: { gender: '남성' },   // "겉으론 세상 자유로운 사내"
+  leo_sagittarius: { gender: '여성', status: '평민' }, // "플라멩코 무희"
+  sagittarius_capricorn: { gender: '남성' }, // "아내가 해변을 걷자… 손주가 무릎에"
+  scorpio_cancer: { gender: '남성' },       // "아내가 병으로 누웠을 때조차"
+  virgo_cancer: { gender: '남성' },         // "아내가 병으로 누웠을 때도"
+  libra_cancer: { gender: '여성' },         // "당신을 마음에 둔 남자가 다가왔을 때도"
+  // 신분: story의 직업 근거 (재력은 신분에서 자동 파생)
+  leo_aries: { status: '평민' },            // 검술 사범
+  leo_taurus: { status: '평민' },           // 황금 세공인
+  leo_gemini: { status: '귀족' },           // 궁정 시인
+  leo_cancer: { status: '귀족' },           // 황실 음악가
+  leo_leo: { status: '평민' },              // 인기 배우
+  leo_libra: { status: '평민' },            // 무대 감독
+  leo_capricorn: { status: '평민' },        // 검술 사범
+  leo_pisces: { status: '평민' },           // 배우
+  capricorn_aries: { status: '평민' },      // 산악인
+  capricorn_taurus: { status: '평민' },     // 석공 장인
+  capricorn_gemini: { status: '평민' },     // 측량사
+  capricorn_virgo: { status: '평민' },      // 시계 장인
+  capricorn_libra: { status: '귀족' },      // 왕실 건축가
+  capricorn_scorpio: { status: '평민' },    // 갱도 책임자
+  capricorn_sagittarius: { status: '귀족' }, // 법학자
+  capricorn_capricorn: { status: '귀족' },  // 재상
+  capricorn_pisces: { status: '평민' },     // 관료
+  capricorn_leo: { status: '평민' },        // 시장
 };
 
 export function generateProfile(character) {
@@ -70,11 +103,13 @@ export function generateProfile(character) {
   else age = 60 + (u % 26);
 
   return {
-    gender,
+    gender: PROFILE_OVERRIDES[character.id]?.gender ?? gender,
     build,
     appearance,
-    status: finalStatus,
-    wealth,
+    status: PROFILE_OVERRIDES[character.id]?.status ?? finalStatus,
+    wealth: PROFILE_OVERRIDES[character.id]?.status
+      ? pick(WEALTH_BY_STATUS[PROFILE_OVERRIDES[character.id].status], u, 2)
+      : wealth,
     lifespan: `${age}세`,
   };
 }
