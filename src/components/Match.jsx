@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ui from '../data/ui.json';
 import characters from '../data/characters.json';
 import { scoreMatch, verdictText, KOOT_NAMES, encodeToken } from '../utils/match';
+import { getPastLifeBond } from '../utils/pastlife';
 import { fillNames } from '../utils/korean';
 import { signNameKo } from '../utils/astro';
 import matchElements from '../data/match_elements.json';
@@ -30,13 +31,14 @@ function PersonCard({ person }) {
   const ch = characters.find((c) => c.id === `${person.sun}_${person.moon}`);
   return (
     <div className="match-person">
+      <div className="match-person-pastlife">🌀 전생의 모습</div>
       <div className="match-person-emoji">{ch?.emoji ?? '🔮'}</div>
       <div className="match-person-name">{person.name}</div>
       <div className="match-person-signs">
         <span className="sign-badge sign-sun">{SIGN_GLYPH[person.sun]} {signNameKo(person.sun)}</span>
         <span className="sign-badge sign-moon">{SIGN_GLYPH[person.moon]} {signNameKo(person.moon)}</span>
       </div>
-      {ch && <div className="match-person-title">{ch.title}</div>}
+      {ch && <div className="match-person-title">「{ch.title}」</div>}
     </div>
   );
 }
@@ -50,6 +52,10 @@ export function MatchResultView({ personA, personB }) {
   const scores = scoreMatch(personA, personB);
   const verdict = verdictText(scores.total);
 
+  const charA = characters.find((c) => c.id === `${personA.sun}_${personA.moon}`);
+  const charB = characters.find((c) => c.id === `${personB.sun}_${personB.moon}`);
+  const bond = getPastLifeBond(personA, personB, charA, charB, scores.total);
+
   const elKey = pairKey(ELEMENT[personA.sun], ELEMENT[personB.sun], ELEMENT_ORDER);
   const moonKey = pairKey(personA.moon, personB.moon, MOON_ORDER);
   const elText = matchElements.find((e) => e.id === elKey);
@@ -62,6 +68,7 @@ export function MatchResultView({ personA, personB }) {
     const text = T.share_text_template
       .replace('{nameA}', personA.name)
       .replace('{nameB}', personB.name)
+      .replace('{bond}', bond ? bond.title : '')
       .replace('{total}', scores.total);
     if (navigator.share) {
       navigator.share({ title: T.share_title, text, url });
@@ -82,6 +89,7 @@ export function MatchResultView({ personA, personB }) {
         <span className="form-step-badge">{T.badge}</span>
       </header>
       <h2 className="match-result-title">{T.title}</h2>
+      <p className="match-result-subtitle">{T.subtitle}</p>
 
       <div className="match-persons">
         <PersonCard person={personA} />
@@ -93,6 +101,15 @@ export function MatchResultView({ personA, personB }) {
         <div className="match-total-score">{scores.total}<span className="match-score-unit">/100</span></div>
         <div className="match-verdict text-gold">{verdict}</div>
       </div>
+
+      {bond && (
+        <div className="card-glass result-section bond-section">
+          <h3 className="section-title">{T.bond_title}</h3>
+          <div className="bond-name text-gold">{bond.title}</div>
+          <p className="bond-tagline">{bond.tagline}</p>
+          <p className="section-body">{bond.story}</p>
+        </div>
+      )}
 
       {elText && (
         <>

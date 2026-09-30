@@ -154,7 +154,7 @@ function MatchLoading({ onDone }) {
   return (
     <div className="loading-page">
       <div className="loading-orb">💫</div>
-      <p className="loading-text">두 영혼의 인연을 읽는 중...</p>
+      <p className="loading-text">전생의 기록을 펼치는 중...</p>
     </div>
   );
 }

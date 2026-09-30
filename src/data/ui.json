@@ -197,9 +197,9 @@
     "badge": "전생 궁합 결과",
     "back": "← 처음으로",
     "title": "전생 궁합",
-    "good": "💑 잘 맞는 부분",
-    "clash": "💥 부딪치는 부분",
-    "homework": "💡 둘이 풀어야 할 숙제",
+    "good": "🤝 전생부터 잘 맞았던 부분",
+    "clash": "⚡ 전생에도 부딪혔던 부분",
+    "homework": "📜 전생에서 이어진 숙제",
     "detail_open": "▼ 상세 점수 보기",
     "detail_close": "▲ 상세 점수 접기",
     "detail_title": "상세 항목",
@@ -243,8 +243,10 @@
     "share": "📤 결과 공유하기",
     "cta_mine": "🔮 내 전생 보기",
     "share_title": "전생 궁합 결과",
-    "share_text_template": "{nameA} × {nameB} 궁합 점수는 {total}점! ✨",
-    "footer_note": "베딕 점성술 기반"
+    "share_text_template": "{nameA} × {nameB}의 전생 인연은 '{bond}'! 궁합 {total}점 ✨",
+    "footer_note": "베딕 점성술 기반",
+    "subtitle": "두 영혼이 전생에 맺었던 인연을 풀어봅니다",
+    "bond_title": "🕰️ 전생의 인연"
   },
   "match_result_invalid": {
     "body": "올바르지 않거나 만료된 궁합 결과 링크입니다.",
