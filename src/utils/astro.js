@@ -27,9 +27,11 @@ function daysSince2000(year, month, day) {
 }
 
 // 달 별자리 — 27.32일 주기 근사 (시간 입력 시)
-export function getMoonSignWithTime(year, month, day, hour) {
-  const d = hour !== null && hour !== undefined ? hour : 0;
-  const y = (((daysSince2000(year, month, day) + d / 24) % 27.32) + 27.32) % 27.32;
+export function getMoonSignWithTime(year, month, day, hour, minute = 0) {
+  const h = hour !== null && hour !== undefined ? hour : 0;
+  const m = minute !== null && minute !== undefined ? minute : 0;
+  const d = (h + m / 60) / 24;
+  const y = (((daysSince2000(year, month, day) + d) % 27.32) + 27.32) % 27.32;
   const k = Math.floor((y / 27.32) * 12);
   return SIGNS[k];
 }

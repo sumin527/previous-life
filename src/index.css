@@ -84,3 +84,7 @@
 /* ===== 추가: 궁합 인물 카드 뱃지 ===== */
 .match-person-signs { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
 .match-person-signs .sign-badge { font-size: 0.68rem; padding: 4px 10px; white-space: nowrap; }
+
+/* ===== 추가: 입력 정보 요약 + 출생지 한 줄 ===== */
+.input-summary { text-align: center; font-size: 0.78rem; color: var(--text-muted); opacity: 0.85; margin-bottom: 16px; letter-spacing: 0.02em; }
+.region-karma-line { margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(155, 109, 255, 0.25); color: var(--violet); }

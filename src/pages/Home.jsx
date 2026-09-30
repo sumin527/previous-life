@@ -74,6 +74,7 @@ function BirthForm({ onBack, onResult }) {
   const [month, setMonth] = useState('');
   const [day, setDay] = useState('');
   const [hour, setHour] = useState('');
+  const [minute, setMinute] = useState('');
   const [timeUnknown, setTimeUnknown] = useState(false);
   const [region, setRegion] = useState('');
   const [placeUnknown, setPlaceUnknown] = useState(false);
@@ -98,9 +99,10 @@ function BirthForm({ onBack, onResult }) {
       setError(FORM.errors.date); return;
     }
     if (!timeUnknown && hour === '') { setError(FORM.errors.time); return; }
+    if (!timeUnknown && minute === '') { setError(FORM.errors.time); return; }
     if (!placeUnknown && region === '') { setError(FORM.errors.place); return; }
     if (!gender) { setError(FORM.errors.gender); return; }
-    onResult({ year: y, month: m, day: d, hour: timeUnknown ? null : parseInt(hour), region: placeUnknown ? '' : region });
+    onResult({ year: y, month: m, day: d, hour: timeUnknown ? null : parseInt(hour), minute: timeUnknown ? null : parseInt(minute), region: placeUnknown ? '' : region, gender });
   };
 
   return (
@@ -139,16 +141,28 @@ function BirthForm({ onBack, onResult }) {
         </div>
         <div className="form-group">
           <label>{FORM.labels.birth_time}</label>
-          <select
-            className="form-input" value={hour}
-            onChange={(e) => setHour(e.target.value)}
-            disabled={timeUnknown}
-          >
-            <option value="">{FORM.time_placeholder}</option>
-            {Array.from({ length: 24 }, (_, h) => (
-              <option key={h} value={h}>{timeLabel(h)}</option>
-            ))}
-          </select>
+          <div className="form-row">
+            <select
+              className="form-input" value={hour}
+              onChange={(e) => setHour(e.target.value)}
+              disabled={timeUnknown}
+            >
+              <option value="">{FORM.time_placeholder}</option>
+              {Array.from({ length: 24 }, (_, h) => (
+                <option key={h} value={h}>{timeLabel(h)}</option>
+              ))}
+            </select>
+            <select
+              className="form-input" value={minute}
+              onChange={(e) => setMinute(e.target.value)}
+              disabled={timeUnknown}
+            >
+              <option value="">{FORM.minute_placeholder}</option>
+              {Array.from({ length: 60 }, (_, mi) => (
+                <option key={mi} value={mi}>{mi}분</option>
+              ))}
+            </select>
+          </div>
           <label className="form-check">
             <input type="checkbox" checked={timeUnknown} onChange={(e) => setTimeUnknown(e.target.checked)} />
             <span>{FORM.time_unknown}</span>
@@ -211,7 +225,8 @@ function VedicCta({ birth, character }) {
     const dob = `${birth.year}-${String(birth.month).padStart(2, '0')}-${String(birth.day).padStart(2, '0')}`;
     params.set('dob', dob);
     if (birth.hour !== null && birth.hour !== undefined) {
-      params.set('tob', `${String(birth.hour).padStart(2, '0')}:00`);
+      const mm = birth.minute !== null && birth.minute !== undefined ? birth.minute : 0;
+      params.set('tob', `${String(birth.hour).padStart(2, '0')}:${String(mm).padStart(2, '0')}`);
     }
     params.set('place', REGION_TO_CITY[birth.region] || '서울');
     params.set('ch', character.title);
@@ -241,11 +256,33 @@ function Result({ birth, onRetry, onHome }) {
   const { character, sunSign, moonSign, profile } = useMemo(() => {
     const sun = getSunSign(birth.year, birth.month, birth.day);
     const moon = birth.hour !== null && birth.hour !== undefined
-      ? getMoonSignWithTime(birth.year, birth.month, birth.day, birth.hour)
+      ? getMoonSignWithTime(birth.year, birth.month, birth.day, birth.hour, birth.minute)
       : getMoonSignHash(birth.year, birth.month, birth.day);
     const ch = characters.find((c) => c.id === `${sun}_${moon}`);
     return { character: ch, sunSign: sun, moonSign: moon, profile: ch ? generateProfile(ch) : null };
   }, [birth]);
+
+  // A안: 입력 정보 요약 + 출생지 한 줄
+  const inputSummary = useMemo(() => {
+    const date = `${birth.year}년 ${birth.month}월 ${birth.day}일`;
+    const hasTime = birth.hour !== null && birth.hour !== undefined;
+    const parts = [date];
+    if (hasTime) parts.push(`${birth.hour}시 ${birth.minute ?? 0}분`);
+    if (birth.region) parts.push(REGION_TO_CITY[birth.region] || birth.region);
+    if (birth.gender && birth.gender !== '선택 안 함') parts.push(birth.gender);
+    return (RESULT.input_summary_template || '📋 {parts} 기준으로 분석했어요').replace('{parts}', parts.join(' · '));
+  }, [birth]);
+
+  const regionKarmaLine = useMemo(() => {
+    if (!birth.region || !character) return '';
+    const lines = RESULT.region_karma_lines || [];
+    if (!lines.length) return '';
+    let u = 0;
+    const s = birth.region + character.id;
+    for (let i = 0; i < s.length; i++) { u = (u << 5) - u + s.charCodeAt(i); u |= 0; }
+    const short = REGION_TO_CITY[birth.region] || birth.region;
+    return lines[Math.abs(u) % lines.length].replace('{region}', short);
+  }, [birth, character]);
 
   if (!character) {
     return (
@@ -304,6 +341,8 @@ function Result({ birth, onRetry, onHome }) {
         <span className="form-step-badge">{RESULT.badge}</span>
       </header>
 
+      <p className="input-summary">{inputSummary}</p>
+
       <div className="result-hero">
         <div className="result-emoji">{character.emoji || '🔮'}</div>
         <h2 className="result-title text-gold">{character.title || RESULT.unknown_title}</h2>
@@ -350,6 +389,7 @@ function Result({ birth, onRetry, onHome }) {
       <div className="card-glass result-section">
         <h3 className="section-title">{RESULT.karma_title}</h3>
         <p className="section-body">{character.karma || RESULT.karma_empty}</p>
+        {regionKarmaLine && <p className="section-body region-karma-line">{regionKarmaLine}</p>}
       </div>
 
       <VedicCta birth={birth} character={character} />
