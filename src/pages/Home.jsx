@@ -5,7 +5,7 @@ import characters from '../data/characters.json';
 import { getSunSign, getMoonSignWithTime, getMoonSignHash, signNameKo } from '../utils/astro';
 import { generateProfile } from '../utils/profile';
 import { encodeToken } from '../utils/match';
-import { MatchInvite } from '../components/Match';
+import { MatchHome } from '../components/Match';
 
 const LANDING = ui.landing;
 const FORM = ui.form;
@@ -313,7 +313,7 @@ function Result({ birth, onRetry, onHome }) {
 
   if (showInvite) {
     return (
-      <MatchInvite
+      <MatchHome
         sunSign={sunSign}
         moonSign={moonSign}
         onBack={() => setShowInvite(false)}

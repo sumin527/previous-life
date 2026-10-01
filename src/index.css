@@ -92,6 +92,11 @@
 .bond-name { font-size: 1.25rem; font-weight: 800; text-align: center; margin-bottom: 6px; }
 .bond-tagline { text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px; }
 
+/* ===== 추가: 궁합 탭 ===== */
+.match-tabs { display: flex; gap: 0; margin-bottom: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 14px; padding: 4px; }
+.match-tab { flex: 1; background: none; border: none; color: var(--text-muted); font-size: 0.88rem; font-weight: 700; padding: 12px 8px; border-radius: 10px; cursor: pointer; transition: all 0.15s; }
+.match-tab.active { background: linear-gradient(135deg, #c9a227, var(--gold)); color: #1a1200; }
+
 /* ===== 추가: 결과 공유-백 ===== */
 .share-back-card { margin-top: 8px; text-align: center; border-color: rgba(232, 200, 74, 0.35); }
 .share-back-title { font-size: 1rem; font-weight: 800; color: var(--gold); margin-bottom: 8px; }
