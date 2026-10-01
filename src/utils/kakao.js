@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 // 카카오 JavaScript 키 — https://developers.kakao.com 에서 앱 생성 후 발급
 // 앱 설정 > 플랫폼 > Web에 https://previous-life.pages.dev 등록 필요
-export const KAKAO_JAVASCRIPT_KEY = '';
+export const KAKAO_JAVASCRIPT_KEY = '2553f5d0db629128b490cda22d79e011';
 
 const SDK_URL = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js';
 
