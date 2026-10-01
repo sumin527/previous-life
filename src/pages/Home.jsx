@@ -62,7 +62,11 @@ function Landing({ onStart }) {
         </p>
         <button className="btn btn-gold btn-large" onClick={onStart}>{LANDING.cta}</button>
         <p className="landing-hint">{LANDING.hint}</p>
-        <p className="landing-disclaimer">{LANDING.disclaimer}</p>
+        <p className="landing-disclaimer">
+          {LANDING.disclaimer.map((line, i) => (
+            <React.Fragment key={i}>{line}{i < LANDING.disclaimer.length - 1 && <br />}</React.Fragment>
+          ))}
+        </p>
       </div>
     </div>
   );
