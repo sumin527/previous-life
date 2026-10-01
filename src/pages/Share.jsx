@@ -6,6 +6,7 @@ import { decodeToken } from '../utils/match';
 import { signNameKo } from '../utils/astro';
 
 const T = ui.share_page;
+const R = ui.result;
 
 const SIGN_GLYPH = {
   aries: '♈', taurus: '♉', gemini: '♊', cancer: '♋', leo: '♌', virgo: '♍',
@@ -31,6 +32,10 @@ export default function Share() {
 
   const teaser = character.story;
 
+  const charmStars = Array.from({ length: 5 }, (_, i) => (
+    <span key={i} className={i < character.charm ? 'star-filled' : 'star-empty'}>★</span>
+  ));
+
   return (
     <div className="result-page page">
       <header className="result-header">
@@ -45,6 +50,22 @@ export default function Share() {
         <div className="result-signs">
           <span className="sign-badge sign-sun">{SIGN_GLYPH[data.sun]} 태양 {signNameKo(data.sun)}</span>
           <span className="sign-badge sign-moon">{SIGN_GLYPH[data.moon]} 달 {signNameKo(data.moon)}</span>
+        </div>
+      </div>
+      <div className="card-glass result-stats">
+        <div className="stat-item">
+          <span className="stat-label">{R.stats.soul_age}</span>
+          <span className="stat-value text-gold">{character.soul_age.toLocaleString()}{R.stats.soul_age_unit}</span>
+        </div>
+        <div className="stat-divider" />
+        <div className="stat-item">
+          <span className="stat-label">{R.stats.reincarnation}</span>
+          <span className="stat-value text-gold">{character.reincarnation_count}{R.stats.reincarnation_unit}</span>
+        </div>
+        <div className="stat-divider" />
+        <div className="stat-item">
+          <span className="stat-label">{R.stats.charm}</span>
+          <span className="charm-stars">{charmStars}</span>
         </div>
       </div>
       <div className="card-glass result-section">
