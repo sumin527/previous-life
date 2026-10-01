@@ -5,6 +5,7 @@ import { scoreMatch, verdictText, KOOT_NAMES, encodeToken } from '../utils/match
 import { getPastLifeBond } from '../utils/pastlife';
 import { fillNames } from '../utils/korean';
 import { getSunSign, getMoonSignWithTime, getMoonSignHash, signNameKo } from '../utils/astro';
+import { useKakaoReady, shareViaKakao } from '../utils/kakao';
 import matchElements from '../data/match_elements.json';
 import matchMoonPairs from '../data/match_moonpairs.json';
 
@@ -182,6 +183,7 @@ function PersonCard({ person }) {
 export function MatchResultView({ personA, personB, shareBackTo }) {
   const [copied, setCopied] = useState(false);
   const [detailOpen, setDetailOpen] = useState(false);
+  const kakaoReady = useKakaoReady();
   const T = ui.match_result;
 
   const scores = scoreMatch(personA, personB);
@@ -204,13 +206,27 @@ export function MatchResultView({ personA, personB, shareBackTo }) {
       .replace('{nameB}', personB.name)
       .replace('{bond}', bond ? bond.title : '')
       .replace('{total}', scores.total);
-    if (navigator.share) {
-      navigator.share({ title: T.share_title, text, url: resultUrl });
-    } else {
-      await navigator.clipboard?.writeText(resultUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
+    await shareViaKakao(
+      {
+        title: (T.kakao_title || T.share_title)
+          .replace('{nameA}', personA.name)
+          .replace('{nameB}', personB.name)
+          .replace('{bond}', bond ? bond.title : ''),
+        description: (T.kakao_description || '').replace('{total}', scores.total),
+        imageUrl: `${window.location.origin}/og-image.png`,
+        url: resultUrl,
+        buttonTitle: T.kakao_button_title,
+      },
+      async () => {
+        if (navigator.share) {
+          navigator.share({ title: T.share_title, text, url: resultUrl });
+        } else {
+          await navigator.clipboard?.writeText(resultUrl);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        }
+      }
+    );
   };
 
   const detailItems = T.items.map(({ key, label }) => ({
@@ -295,12 +311,12 @@ export function MatchResultView({ personA, personB, shareBackTo }) {
             <p className="share-back-title">💌 {shareBackTo}에게 결과 보내기</p>
             <p className="share-back-note">{(T.share_back_note || '').replace(/\{name\}/g, shareBackTo)}</p>
             <button className="btn btn-gold w-full" onClick={shareResult}>
-              {copied ? T.copied : (T.share_back || T.share).replace('{name}', shareBackTo)}
+              {copied ? T.copied : (kakaoReady ? (T.kakao_share_back || T.share_back || T.share) : (T.share_back || T.share)).replace('{name}', shareBackTo)}
             </button>
           </div>
         ) : (
           <button className="btn btn-gold w-full" onClick={shareResult}>
-            {copied ? T.copied : T.share}
+            {copied ? T.copied : (kakaoReady ? (T.kakao_share || T.share) : T.share)}
           </button>
         )}
       </div>
@@ -315,6 +331,7 @@ export function MatchInvite({ sunSign, moonSign, onBack, bare }) {
   const [link, setLink] = useState('');
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState('');
+  const kakaoReady = useKakaoReady();
   const T = ui.match_invite;
 
   const create = () => {
@@ -330,13 +347,24 @@ export function MatchInvite({ sunSign, moonSign, onBack, bare }) {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const shareSns = () => {
+  const shareSns = async () => {
     const text = T.share_text_template.replace('{name}', nickname.trim());
-    if (navigator.share) {
-      navigator.share({ title: T.share_title, text, url: link });
-    } else {
-      copyLink();
-    }
+    await shareViaKakao(
+      {
+        title: (T.kakao_title || T.share_title).replace('{name}', nickname.trim()),
+        description: T.kakao_description || '',
+        imageUrl: `${window.location.origin}/og-image.png`,
+        url: link,
+        buttonTitle: T.kakao_button_title,
+      },
+      async () => {
+        if (navigator.share) {
+          navigator.share({ title: T.share_title, text, url: link });
+        } else {
+          copyLink();
+        }
+      }
+    );
   };
 
   const body = (
@@ -374,7 +402,9 @@ export function MatchInvite({ sunSign, moonSign, onBack, bare }) {
           <div style={{ marginTop: 20 }}>
             <div className="divider mb-16" />
             <p className="invite-flow-note">{T.flow_note}</p>
-            <button className="btn btn-gold w-full" onClick={shareSns}>{T.share_sns}</button>
+            <button className="btn btn-gold w-full" onClick={shareSns}>
+              {kakaoReady ? (T.kakao_share || T.share_sns) : T.share_sns}
+            </button>
             <button className="btn btn-outline w-full mt-12" onClick={copyLink}>
               {copied ? T.copied : T.copy_link}
             </button>

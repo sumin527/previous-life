@@ -5,6 +5,7 @@ import characters from '../data/characters.json';
 import { getSunSign, getMoonSignWithTime, getMoonSignHash, signNameKo } from '../utils/astro';
 import { generateProfile } from '../utils/profile';
 import { encodeToken } from '../utils/match';
+import { useKakaoReady, shareViaKakao } from '../utils/kakao';
 import { MatchHome } from '../components/Match';
 
 const LANDING = ui.landing;
@@ -298,19 +299,33 @@ function Result({ birth, onRetry, onHome }) {
     );
   }
 
+  const kakaoReady = useKakaoReady();
+
   const share = async () => {
     const token = encodeToken({ sun: sunSign, moon: moonSign, name: '' });
     const url = `${window.location.origin}/share?d=${token}`;
     const text = RESULT.share_text_template
       .replace('{title}', character.title)
       .replace('{url}', url);
-    if (navigator.share) {
-      navigator.share({ title: RESULT.share_title, text, url });
-    } else {
-      await navigator.clipboard?.writeText(url);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
+    const sent = await shareViaKakao(
+      {
+        title: RESULT.kakao_title.replace('{title}', character.title),
+        description: RESULT.kakao_description,
+        imageUrl: `${window.location.origin}/og-image.png`,
+        url,
+        buttonTitle: RESULT.kakao_button_title,
+      },
+      async () => {
+        if (navigator.share) {
+          navigator.share({ title: RESULT.share_title, text, url });
+        } else {
+          await navigator.clipboard?.writeText(url);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        }
+      }
+    );
+    if (sent) return;
   };
 
   const goMatch = () => setShowInvite(true);
@@ -400,7 +415,7 @@ function Result({ birth, onRetry, onHome }) {
 
       <div className="result-actions">
         <button className="btn btn-gold w-full" onClick={share}>
-          {copied ? RESULT.buttons.copied : RESULT.buttons.share}
+          {copied ? RESULT.buttons.copied : (kakaoReady ? RESULT.buttons.kakao_share : RESULT.buttons.share)}
         </button>
         <button className="btn btn-outline w-full mt-12" onClick={goMatch}>
           {RESULT.buttons.match}
