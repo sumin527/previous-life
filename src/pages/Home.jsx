@@ -237,11 +237,11 @@ function VedicCta({ birth, character }) {
     <div className="card-glass vedic-cta-card">
       <h3 className="section-title">🔮 전생 캐릭터는 빙산의 일각</h3>
       <p className="vedic-cta-body">
-        같은 달 별자리라도, 태어난 시간에 따라 이번 생의 운명은 달라져요.
-        베딕으로 알아보는 이번 생의 운명 흐름을 무료로 확인해 보세요.
+        같은 달 별자리라도, 태어난 시간에 따라 베딕 차트는 완전히 달라져요.
+        이번 생 나의 베딕 차트는 어떤 모습인지 무료로 확인해 보세요.
       </p>
       <a href={href} target="_blank" rel="noopener noreferrer" className="btn btn-gold w-full vedic-cta-btn">
-        ✨ 이번 생의 운명 흐름 보기 →
+        🪐 이번 생의 베딕 차트 보러가기 →
       </a>
       <p className="vedic-cta-note">입력하신 정보로 자동 계산됩니다 · 저장되지 않아요</p>
     </div>
