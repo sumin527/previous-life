@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ui from '../data/ui.json';
-import { decodeToken } from '../utils/match';
+import { decodeToken, encodeToken } from '../utils/match';
 import { getSunSign, getMoonSignWithTime, getMoonSignHash, signNameKo } from '../utils/astro';
 import { MatchResultView } from '../components/Match';
 
@@ -163,7 +163,16 @@ export default function Match() {
   const [params] = useSearchParams();
   const [stage, setStage] = useState('input');
   const [personB, setPersonB] = useState(null);
-  const personA = decodeToken(params.get('d') ?? '');
+  const personA = React.useMemo(() => decodeToken(params.get('d') ?? ''), [params]);
+
+  // 수신자가 결과를 보면 주소를 결과 링크로 바꿔서 바로 전달할 수 있게
+  React.useEffect(() => {
+    if (stage === 'result' && personA && personB) {
+      try {
+        window.history.replaceState(null, '', `/match-result?d=${encodeToken(personA, personB)}`);
+      } catch { /* ignore */ }
+    }
+  }, [stage, personA, personB]);
 
   if (!personA || !personA.sun || !personA.moon) {
     return (
@@ -184,7 +193,7 @@ export default function Match() {
       )}
       {stage === 'loading' && <MatchLoading onDone={() => setStage('result')} />}
       {stage === 'result' && personB && (
-        <MatchResultView personA={personA} personB={personB} />
+        <MatchResultView personA={personA} personB={personB} shareBackTo={personA.name} />
       )}
     </div>
   );

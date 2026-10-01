@@ -92,6 +92,12 @@
 .bond-name { font-size: 1.25rem; font-weight: 800; text-align: center; margin-bottom: 6px; }
 .bond-tagline { text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px; }
 
+/* ===== 추가: 결과 공유-백 ===== */
+.share-back-card { margin-top: 8px; text-align: center; border-color: rgba(232, 200, 74, 0.35); }
+.share-back-title { font-size: 1rem; font-weight: 800; color: var(--gold); margin-bottom: 8px; }
+.share-back-note { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 14px; }
+.invite-flow-note { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; text-align: center; margin-bottom: 14px; }
+
 /* ===== 추가: 입력 정보 요약 + 출생지 한 줄 ===== */
 .input-summary { text-align: center; font-size: 0.78rem; color: var(--text-muted); opacity: 0.85; margin-bottom: 16px; letter-spacing: 0.02em; }
 .region-karma-line { margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(155, 109, 255, 0.25); color: var(--violet); }

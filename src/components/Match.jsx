@@ -44,7 +44,7 @@ function PersonCard({ person }) {
 }
 
 // _d — 궁합 결과 본문 (공유 컴포넌트)
-export function MatchResultView({ personA, personB }) {
+export function MatchResultView({ personA, personB, shareBackTo }) {
   const [copied, setCopied] = useState(false);
   const [detailOpen, setDetailOpen] = useState(false);
   const T = ui.match_result;
@@ -62,18 +62,17 @@ export function MatchResultView({ personA, personB }) {
   const moonText = matchMoonPairs.find((e) => e.id === moonKey);
   const homework = moonText ? fillNames(moonText.homework, personA.name, personB.name) : null;
 
+  const resultUrl = `${window.location.origin}/match-result?d=${encodeToken(personA, personB)}`;
   const shareResult = async () => {
-    const token = encodeToken(personA, personB);
-    const url = `${window.location.origin}/match-result?d=${token}`;
     const text = T.share_text_template
       .replace('{nameA}', personA.name)
       .replace('{nameB}', personB.name)
       .replace('{bond}', bond ? bond.title : '')
       .replace('{total}', scores.total);
     if (navigator.share) {
-      navigator.share({ title: T.share_title, text, url });
+      navigator.share({ title: T.share_title, text, url: resultUrl });
     } else {
-      await navigator.clipboard?.writeText(url);
+      await navigator.clipboard?.writeText(resultUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
@@ -156,9 +155,19 @@ export function MatchResultView({ personA, personB }) {
       </div>
 
       <div className="result-actions">
-        <button className="btn btn-gold w-full" onClick={shareResult}>
-          {copied ? T.copied : T.share}
-        </button>
+        {shareBackTo ? (
+          <div className="card-glass share-back-card">
+            <p className="share-back-title">💌 {shareBackTo}에게 결과 보내기</p>
+            <p className="share-back-note">{(T.share_back_note || '').replace(/\{name\}/g, shareBackTo)}</p>
+            <button className="btn btn-gold w-full" onClick={shareResult}>
+              {copied ? T.copied : (T.share_back || T.share).replace('{name}', shareBackTo)}
+            </button>
+          </div>
+        ) : (
+          <button className="btn btn-gold w-full" onClick={shareResult}>
+            {copied ? T.copied : T.share}
+          </button>
+        )}
       </div>
       <p className="form-note text-center mt-24">{T.footer_note}</p>
     </div>
@@ -233,6 +242,7 @@ export function MatchInvite({ sunSign, moonSign, onBack }) {
         {link && (
           <div style={{ marginTop: 20 }}>
             <div className="divider mb-16" />
+            <p className="invite-flow-note">{T.flow_note}</p>
             <button className="btn btn-gold w-full" onClick={shareSns}>{T.share_sns}</button>
             <button className="btn btn-outline w-full mt-12" onClick={copyLink}>
               {copied ? T.copied : T.copy_link}

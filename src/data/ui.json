@@ -187,7 +187,8 @@
     "copied": "✓ 복사됐어요!",
     "hint": "링크를 받은 친구가 자기 정보를 입력하면 궁합이 나와요",
     "share_text_template": "{name}의 전생 궁합을 확인해보세요! 🔮",
-    "share_title": "전생 궁합 보기"
+    "share_title": "전생 궁합 보기",
+    "flow_note": "💡 결과는 친구 화면에 먼저 나와요. 친구에게 결과 링크를 다시 받으면 나도 확인할 수 있어요!"
   },
   "match_invalid": {
     "title": "🔮 초대 링크가 올바르지 않아요",
@@ -246,7 +247,9 @@
     "share_text_template": "{nameA} × {nameB}의 전생 인연은 '{bond}'! 궁합 {total}점 ✨",
     "footer_note": "베딕 점성술 기반",
     "subtitle": "두 영혼이 전생에 맺었던 인연을 풀어봅니다",
-    "bond_title": "🕰️ 전생의 인연"
+    "bond_title": "🕰️ 전생의 인연",
+    "share_back": "📤 {name}에게 결과 보내기",
+    "share_back_note": "이 링크 하나면 돼요. {name}에게 보내주면 {name}도 같은 궁합 결과를 볼 수 있어요."
   },
   "match_result_invalid": {
     "body": "올바르지 않거나 만료된 궁합 결과 링크입니다.",
