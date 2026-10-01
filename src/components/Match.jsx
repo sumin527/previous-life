@@ -44,7 +44,7 @@ function timeLabel(h) {
   return `${h}시`;
 }
 
-export function MatchBirthForm({ personA, onResult, intro, submitLabel }) {
+export function MatchBirthForm({ personA, onResult, intro, submitLabel, nicknameLabel, nicknamePlaceholder, nicknameError }) {
   const [nickname, setNickname] = useState('');
   const [year, setYear] = useState('');
   const [month, setMonth] = useState('');
@@ -55,12 +55,15 @@ export function MatchBirthForm({ personA, onResult, intro, submitLabel }) {
   const [error, setError] = useState('');
   const T = ui.match_invite;
   const FORM = ui.form;
+  const labelNickname = nicknameLabel || T.nickname_label;
+  const placeholderNickname = nicknamePlaceholder || T.nickname_placeholder;
+  const errorNickname = nicknameError || T.nickname_error;
 
   const maxDay = daysInMonth(parseInt(year) || 0, parseInt(month) || 0);
 
   const submit = () => {
     setError('');
-    if (!nickname.trim()) { setError(T.nickname_error); return; }
+    if (!nickname.trim()) { setError(errorNickname); return; }
     const y = parseInt(year), m = parseInt(month), d = parseInt(day);
     if (!year || !month || !day) { setError('생년월일을 모두 입력해주세요.'); return; }
     if (isNaN(y) || y < 1900 || y > 2025) { setError('올바른 연도를 입력해주세요. (1900–2025)'); return; }
@@ -95,10 +98,10 @@ export function MatchBirthForm({ personA, onResult, intro, submitLabel }) {
       )}
       <div className="card-glass form-card">
         <div className="form-group">
-          <label>{T.nickname_label}</label>
+          <label>{labelNickname}</label>
           <input
             className="form-input" type="text"
-            placeholder={T.nickname_placeholder}
+            placeholder={placeholderNickname}
             maxLength={T.nickname_maxlength}
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
@@ -194,10 +197,17 @@ export function MatchResultView({ personA, personB, shareBackTo }) {
   const bond = getPastLifeBond(personA, personB, charA, charB, scores.total);
 
   const elKey = pairKey(ELEMENT[personA.sun], ELEMENT[personB.sun], ELEMENT_ORDER);
-  const moonKey = pairKey(personA.moon, personB.moon, MOON_ORDER);
+  // moonKey는 MOON_ORDER 정렬 순서이므로, A/B 이름도 같은 순서의 사람에 바인딩
+  const [moonFirst, moonSecond] = [personA.moon, personB.moon].sort(
+    (x, y) => MOON_ORDER.indexOf(x) - MOON_ORDER.indexOf(y)
+  );
+  const moonKey = `${moonFirst}_${moonSecond}`;
+  const firstIsA = moonFirst === personA.moon;
+  const nameForA = firstIsA ? personA.name : personB.name;
+  const nameForB = firstIsA ? personB.name : personA.name;
   const elText = matchElements.find((e) => e.id === elKey);
   const moonText = matchMoonPairs.find((e) => e.id === moonKey);
-  const homework = moonText ? fillNames(moonText.homework, personA.name, personB.name) : null;
+  const homework = moonText ? fillNames(moonText.homework, nameForA, nameForB) : null;
 
   const resultUrl = `${window.location.origin}/match-result?d=${encodeToken(personA, personB)}`;
   const shareResult = async () => {
@@ -460,6 +470,9 @@ export function DirectMatch({ sunSign, moonSign }) {
           onResult={(p) => { setPersonB(p); setStage('result'); }}
           intro={<>{T.partner_intro[0]}<br />{T.partner_intro[1]}</>}
           submitLabel={T.submit}
+          nicknameLabel={T.partner_nickname_label}
+          nicknamePlaceholder={T.partner_nickname_placeholder}
+          nicknameError={T.nickname_error}
         />
       </div>
     );

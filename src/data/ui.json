@@ -335,6 +335,8 @@
       "상대방의 출생 정보를 입력해주세요",
       "바로 인연 결과를 확인할 수 있어요"
     ],
+    "partner_nickname_label": "상대방 별명",
+    "partner_nickname_placeholder": "예: 영희",
     "submit": "💫 인연 결과 보기"
   }
 }
