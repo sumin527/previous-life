@@ -21,7 +21,7 @@
 .vedic-cta-card { border: 1px solid rgba(232, 200, 74, 0.35); background: linear-gradient(135deg, rgba(232,200,74,0.08), rgba(155,109,255,0.08)); }
 .vedic-cta-body { font-size: 0.86rem; color: var(--text-muted); line-height: 1.75; margin: 10px 0 16px; }
 .vedic-cta-btn { text-decoration: none; display: block; text-align: center; }
-.vedic-cta-note { margin-top: 12px; font-size: 0.7rem; color: var(--text-muted); text-align: center; opacity: 0.75; }
+.vedic-cta-note { margin-top: 12px; font-size: 0.7rem; color: var(--text-muted); text-align: center; opacity: 0.75; }.match-cta-card { border: 1px solid rgba(155, 109, 255, 0.45); background: linear-gradient(135deg, rgba(155,109,255,0.1), rgba(232,200,74,0.05)); margin-bottom: 12px; }.match-cta-body { font-size: 0.86rem; color: var(--text-muted); line-height: 1.75; margin: 10px 0 16px; text-align: center; }.result-actions-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
 /* ===== 추가: 프로필 그리드 ===== */
 .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
