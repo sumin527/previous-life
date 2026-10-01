@@ -414,11 +414,12 @@ function Result({ birth, onRetry, onHome }) {
       <VedicCta birth={birth} character={character} />
 
       <div className="result-actions">
-        <button className="btn btn-gold w-full" onClick={share}>
-          {copied ? RESULT.buttons.copied : (kakaoReady ? RESULT.buttons.kakao_share : RESULT.buttons.share)}
-        </button>
-        <button className="btn btn-outline w-full mt-12" onClick={goMatch}>
+        <button className="btn btn-outline w-full" onClick={goMatch}>
           {RESULT.buttons.match}
+        </button>
+        <p className="form-note text-center mt-8">{RESULT.buttons.match_note}</p>
+        <button className="btn btn-outline w-full mt-12" onClick={share}>
+          {copied ? RESULT.buttons.copied : (kakaoReady ? RESULT.buttons.kakao_share : RESULT.buttons.share)}
         </button>
         <button className="btn btn-outline w-full mt-12" onClick={onRetry}>
           {RESULT.buttons.retry}
