@@ -4,7 +4,7 @@ import characters from '../data/characters.json';
 import { scoreMatch, verdictText, KOOT_NAMES, encodeToken } from '../utils/match';
 import { getPastLifeBond } from '../utils/pastlife';
 import { fillNames } from '../utils/korean';
-import { getSunSign, getMoonSignWithTime, getMoonSignHash, signNameKo } from '../utils/astro';
+import { getSunSign, getMoonSign, signNameKo } from '../utils/astro';
 import { useKakaoReady, shareViaKakao } from '../utils/kakao';
 import matchElements from '../data/match_elements.json';
 import matchMoonPairs from '../data/match_moonpairs.json';
@@ -72,10 +72,9 @@ export function MatchBirthForm({ personA, onResult, intro, submitLabel, nickname
       setError(FORM.errors.date); return;
     }
     if (!timeUnknown && hour === '') { setError(FORM.errors.time); return; }
-    const sun = getSunSign(y, m, d);
-    const moon = !timeUnknown && hour !== ''
-      ? getMoonSignWithTime(y, m, d, parseInt(hour))
-      : getMoonSignHash(y, m, d);
+    const hh = !timeUnknown && hour !== '' ? parseInt(hour) : null;
+    const sun = getSunSign(y, m, d, hh, 0);
+    const { sign: moon } = getMoonSign(y, m, d, hh, 0);
     onResult({ name: nickname.trim(), sun, moon, gender: gender || '선택 안 함' });
   };
 

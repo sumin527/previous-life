@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import ui from '../data/ui.json';
 import characters from '../data/characters.json';
-import { getSunSign, getMoonSignWithTime, getMoonSignHash, signNameKo } from '../utils/astro';
+import { getSunSign, getMoonSign, signNameKo } from '../utils/astro';
 import { generateProfile } from '../utils/profile';
 import { encodeToken } from '../utils/match';
 import { useKakaoReady, shareViaKakao } from '../utils/kakao';
@@ -233,7 +233,9 @@ function VedicCta({ birth, character }) {
       const mm = birth.minute !== null && birth.minute !== undefined ? birth.minute : 0;
       params.set('tob', `${String(birth.hour).padStart(2, '0')}:${String(mm).padStart(2, '0')}`);
     }
-    params.set('place', REGION_TO_CITY[birth.region] || '서울');
+    const city = REGION_TO_CITY[birth.region];
+    params.set('place', city || '서울');
+    if (!city) params.set('place_est', '1'); // 출생지 모름 → 서울 임시 계산임을 베딕 사이트에 전달
     params.set('ch', character.title);
     return `${VEDIC_URL}/?${params.toString()}`;
   }, [birth, character]);
@@ -258,13 +260,12 @@ function Result({ birth, onRetry, onHome }) {
   const [copied, setCopied] = useState(false);
   const [showInvite, setShowInvite] = useState(false);
 
-  const { character, sunSign, moonSign, profile } = useMemo(() => {
-    const sun = getSunSign(birth.year, birth.month, birth.day);
-    const moon = birth.hour !== null && birth.hour !== undefined
-      ? getMoonSignWithTime(birth.year, birth.month, birth.day, birth.hour, birth.minute)
-      : getMoonSignHash(birth.year, birth.month, birth.day);
+  const { character, sunSign, moonSign, moonEstimated, profile } = useMemo(() => {
+    const hasTime = birth.hour !== null && birth.hour !== undefined;
+    const sun = getSunSign(birth.year, birth.month, birth.day, hasTime ? birth.hour : null, birth.minute);
+    const { sign: moon, estimated } = getMoonSign(birth.year, birth.month, birth.day, hasTime ? birth.hour : null, birth.minute);
     const ch = characters.find((c) => c.id === `${sun}_${moon}`);
-    return { character: ch, sunSign: sun, moonSign: moon, profile: ch ? generateProfile(ch) : null };
+    return { character: ch, sunSign: sun, moonSign: moon, moonEstimated: estimated, profile: ch ? generateProfile(ch) : null };
   }, [birth]);
 
   // A안: 입력 정보 요약 + 출생지 한 줄
@@ -367,7 +368,7 @@ function Result({ birth, onRetry, onHome }) {
         <h2 className="result-title text-gold">{character.title || RESULT.unknown_title}</h2>
         <div className="result-signs">
           <span className="sign-badge sign-sun">{SIGN_GLYPH[sunSign]} 태양 {signNameKo(sunSign)}</span>
-          <span className="sign-badge sign-moon">{SIGN_GLYPH[moonSign]} 달 {signNameKo(moonSign)}</span>
+          <span className="sign-badge sign-moon">{SIGN_GLYPH[moonSign]} 달 {signNameKo(moonSign)}{moonEstimated && <span className="moon-estimated">{RESULT.moon_estimated}</span>}</span>
         </div>
       </div>
 

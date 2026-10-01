@@ -23,7 +23,8 @@
     "cta": "✨ 내 전생 보러가기",
     "hint": "당신은 몇 번째 환생일까요?",
     "disclaimer": [
-      "이 테스트는 베딕 점성술 개념을 바탕으로 만든 재미용 자기이해 콘텐츠이며,",
+      "별자리는 실제 천문 계산(베딕 차트와 같은 라히리 기준)으로 구하고,",
+      "캐릭터 이야기·영혼 나이 등은 재미를 위한 창작입니다.",
       "실제 전생이나 운명을 단정하지 않습니다."
     ],
     "section_title": "베딕 점성술로 보는 전생 테스트란?",
@@ -175,7 +176,8 @@
     "input_summary_template": "📋 {parts} 기준으로 분석했어요",
     "kakao_title": "나의 전생은 '{title}'",
     "kakao_description": "인도 점성술 베딕으로 보는 당신의 전생이야기",
-    "kakao_button_title": "내 전생 보러가기"
+    "kakao_button_title": "내 전생 보러가기",
+    "moon_estimated": " · 추정"
   },
   "match_invite": {
     "badge": "전생 인연",

@@ -106,3 +106,5 @@
 /* ===== 추가: 입력 정보 요약 + 출생지 한 줄 ===== */
 .input-summary { text-align: center; font-size: 0.78rem; color: var(--text-muted); opacity: 0.85; margin-bottom: 16px; letter-spacing: 0.02em; }
 .region-karma-line { margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(155, 109, 255, 0.25); color: var(--violet); }
+/* ===== 달 별자리 추정 뱃지 (시간 모름) ===== */
+.moon-estimated { opacity: 0.75; font-size: 0.72rem; }
