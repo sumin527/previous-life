@@ -29,9 +29,7 @@ export default function Share() {
     );
   }
 
-  const teaser = character.story.length > 90
-    ? character.story.slice(0, 90) + '…'
-    : character.story;
+  const teaser = character.story;
 
   return (
     <div className="result-page page">
