@@ -1,4 +1,4 @@
-// 궁합 토큰 인코딩/디코딩 + 아쉬타쿠트(Ashtakoot) 8항목 점수 — 원본과 동일 (기존 공유 링크 호환)
+// 인연 토큰 인코딩/디코딩 + 아쉬타쿠트(Ashtakoot) 8항목 점수 — 원본과 동일 (기존 공유 링크 호환)
 
 // ---- 토큰 ----
 export function encodeToken(data, other = null) {
@@ -106,7 +106,7 @@ export const KOOT_NAMES = {
   varna: '바르나 (영혼의 결)',
   vashya: '바샤 (끌림)',
   tara: '타라 (감정 호환)',
-  yoni: '요니 (본능 궁합)',
+  yoni: '요니 (본능 인연)',
   grahaMaitri: '그라하 마이트리 (정신적 우정)',
   gana: '가나 (기질 조화)',
   bhakoot: '바쿠트 (관계 안정도)',

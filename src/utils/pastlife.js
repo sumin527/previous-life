@@ -24,7 +24,7 @@ function hash(s) {
   return Math.abs(u);
 }
 
-// personA/B: {sun, moon, name}, charA/B: characters.json 항목, total: 궁합 총점
+// personA/B: {sun, moon, name}, charA/B: characters.json 항목, total: 인연 총점
 export function getPastLifeBond(personA, personB, charA, charB, total) {
   if (!charA || !charB) return null;
   const elA = ELEMENT[personA.sun];

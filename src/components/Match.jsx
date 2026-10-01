@@ -155,7 +155,7 @@ export function MatchBirthForm({ personA, onResult, intro, submitLabel }) {
           </div>
         </div>
         {error && <p className="form-error mt-16">{error}</p>}
-        <button className="btn btn-gold w-full mt-24" onClick={submit}>{submitLabel || '💑 궁합 결과 보기'}</button>
+        <button className="btn btn-gold w-full mt-24" onClick={submit}>{submitLabel || '💫 인연 결과 보기'}</button>
         <p className="form-note text-center mt-16">{FORM.note}</p>
       </div>
     </>
@@ -178,7 +178,7 @@ function PersonCard({ person }) {
   );
 }
 
-// _d — 궁합 결과 본문 (공유 컴포넌트)
+// _d — 인연 결과 본문 (공유 컴포넌트)
 export function MatchResultView({ personA, personB, shareBackTo }) {
   const [copied, setCopied] = useState(false);
   const [detailOpen, setDetailOpen] = useState(false);
@@ -309,7 +309,7 @@ export function MatchResultView({ personA, personB, shareBackTo }) {
   );
 }
 
-// jh — 궁합 초대 생성 (결과 페이지 내 인라인)
+// jh — 인연 초대 생성 (결과 페이지 내 인라인)
 export function MatchInvite({ sunSign, moonSign, onBack, bare }) {
   const [nickname, setNickname] = useState('');
   const [link, setLink] = useState('');
@@ -397,7 +397,7 @@ export function MatchInvite({ sunSign, moonSign, onBack, bare }) {
   );
 }
 
-// 직접 입력 — 상대방 출생 정보를 바로 입력해서 궁합 확인
+// 직접 입력 — 상대방 출생 정보를 바로 입력해서 인연 확인
 export function DirectMatch({ sunSign, moonSign }) {
   const [stage, setStage] = useState('me');
   const [myName, setMyName] = useState('');
@@ -468,7 +468,7 @@ export function DirectMatch({ sunSign, moonSign }) {
   );
 }
 
-// 궁합 탭 래퍼 — 링크 보내기 / 직접 입력하기
+// 인연 탭 래퍼 — 링크 보내기 / 직접 입력하기
 export function MatchHome({ sunSign, moonSign, onBack }) {
   const [tab, setTab] = useState('invite');
   const T = ui.match_home;

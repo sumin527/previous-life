@@ -29,7 +29,7 @@
 .profile-label { font-size: 0.72rem; color: var(--text-muted); }
 .profile-value { font-size: 0.92rem; font-weight: 600; color: var(--text); }
 
-/* ===== 추가: 궁합 ===== */
+/* ===== 추가: 전생 인연 ===== */
 .match-result-view { padding: 0 0 12px; }
 .match-result-title { text-align: center; font-size: 1.3rem; font-weight: 800; margin: 8px 0 20px; }
 .match-persons { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 20px; }
@@ -81,7 +81,7 @@
 .form-row-3 > div { display: flex; align-items: center; gap: 4px; }
 .form-suffix { font-size: 0.85rem; color: var(--text-muted); white-space: nowrap; }
 
-/* ===== 추가: 궁합 인물 카드 뱃지 ===== */
+/* ===== 추가: 인연 인물 카드 뱃지 ===== */
 .match-person-signs { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
 .match-person-signs .sign-badge { font-size: 0.68rem; padding: 4px 10px; white-space: nowrap; }
 
@@ -92,7 +92,7 @@
 .bond-name { font-size: 1.25rem; font-weight: 800; text-align: center; margin-bottom: 6px; }
 .bond-tagline { text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px; }
 
-/* ===== 추가: 궁합 탭 ===== */
+/* ===== 추가: 인연 탭 ===== */
 .match-tabs { display: flex; gap: 0; margin-bottom: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 14px; padding: 4px; }
 .match-tab { flex: 1; background: none; border: none; color: var(--text-muted); font-size: 0.88rem; font-weight: 700; padding: 12px 8px; border-radius: 10px; cursor: pointer; transition: all 0.15s; }
 .match-tab.active { background: linear-gradient(135deg, #c9a227, var(--gold)); color: #1a1200; }

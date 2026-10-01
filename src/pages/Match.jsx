@@ -48,7 +48,7 @@ export default function Match() {
       {stage === 'input' && (
         <div className="input-form page">
           <header className="form-header">
-            <span className="form-step-badge">궁합 정보 입력</span>
+            <span className="form-step-badge">인연 정보 입력</span>
           </header>
           <MatchBirthForm
             personA={personA}

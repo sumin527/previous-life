@@ -1,4 +1,4 @@
-// 한국어 조사 붙이기 + 궁합 텍스트의 A/B 이름 치환 — 원본과 동일
+// 한국어 조사 붙이기 + 인연 텍스트의 A/B 이름 치환 — 원본과 동일
 
 export function attachParticle(name, type) {
   const hasFinal = (name.charCodeAt(name.length - 1) - 44032) % 28 !== 0;
