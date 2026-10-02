@@ -17,7 +17,7 @@ const SIGN_GLYPH = {
   libra: '♎', scorpio: '♏', sagittarius: '♐', capricorn: '♑', aquarius: '♒', pisces: '♓',
 };
 
-const VEDIC_URL = 'https://vedic-site.sumin527.workers.dev';
+const VEDIC_URL = 'https://vedic.co.kr';
 
 // 17시도 → vedic-site 10도시 매핑
 const REGION_TO_CITY = {
